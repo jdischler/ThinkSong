@@ -1,47 +1,64 @@
-
-	var AudioContext = window.AudioContext || window.webkitAudioContext || false; 
-	var ac = new AudioContext || new webkitAudioContext;
-	Soundfont.instrument(ac, 'https://raw.githubusercontent.com/gleitz/midi-js-soundfonts/gh-pages/MusyngKite/acoustic_guitar_nylon-mp3.js').then(function (instrument) {
-		loadDataUri = function(dataUri) {
-			Player = new MidiPlayer.Player(function(event) {
-				if (event.name == 'Note on' && event.velocity > 0) {
-					instrument.play(event.noteName, ac.currentTime, {gain:event.velocity/100});
-					//document.querySelector('#track-' + event.track + ' code').innerHTML = JSON.stringify(event);
-					//console.log(event);
-				}
-			});
-	
-			Player.loadDataUri(dataUri);
-			Player.on('endOfFile', function() {
-				console.log('Song is done!');
-			});
-			Player.setTempo(200);
-			$(function() {
-				StartAudioContext(Tone.context, "#play-start");
-				$('#play-start').click(function() {
-					if (Player.isPlaying()) {
-						Player.pause();
-					}
-					else {
-						Player.play();
-					}
-				})
-			})
-		}
-	
-		loadDataUri(mario);
-	});
+var Interface = {
+	isMobile : false
+};
 
 	$(function() {
-		//create a synth and connect it to the master output (your speakers)
-	/*	var synth = new Tone.PolySynth(8).toMaster();
+
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			Interface.isMobile = true;
+			$("body").addClass("Mobile");
+			var element = $("<div>", {"id" : "MobileStart"}).appendTo("body");
+			var button = $("<div>").attr("id", "Button").text("Enter").appendTo(element);
+			StartAudioContext(Tone.context, button, function(){
+				element.remove();
+			});
+		}
+	
+		// Bosendoerfer ripped from Logix
+		var piano = new Tone.Sampler({ // .[mp3|ogg]
+			'A0' : 'A0.mp3',
+			'C1' : 'C1.mp3',
+			'D#1' : 'Ds1.mp3',
+			'F#1' : 'Fs1.mp3',
+			'A1' : 'A1.mp3',
+			'C2' : 'C2.mp3',
+			'D#2' : 'Ds2.mp3',
+			'F#2' : 'Fs2.mp3',
+			'A2' : 'A2.mp3',
+			'C3' : 'C3.mp3',
+			'D#3' : 'Ds3.mp3',
+			'F#3' : 'Fs3.mp3',
+			'A3' : 'A3.mp3',
+			'C4' : 'C4.mp3',
+			'D#4' : 'Ds4.mp3',
+			'F#4' : 'Fs4.mp3',
+			'A4' : 'A4.mp3',
+			'C5' : 'C5.mp3',
+			'D#5' : 'Ds5.mp3',
+			'F#5' : 'Fs5.mp3',
+			'A5' : 'A5.mp3',
+			'C6' : 'C6.mp3',
+			'D#6' : 'Ds6.mp3',
+			'F#6' : 'Fs6.mp3',
+			'A6' : 'A6.mp3',
+			'C7' : 'C7.mp3',
+		}, {
+			'release' : 1,
+			'baseUrl' : './piano/',
+		});
 		
-		//Tone.Transport.set(midi.header);
+		var volume = new Tone.Volume(-8).toMaster();
+	//	var chorus = new Tone.Chorus().connect(volume); chorus.wet.value = 0.05;
+	//	var delay = new Tone.FeedbackDelay(1, 0.25).connect(volume); delay.wet.value = 0.025;
+		var reverb = new Tone.Freeverb(0.8, 5000).connect(volume); reverb.wet.value = 0.2;
+		piano.connect(reverb);
+		
 		Tone.Transport.bpm.value = midi.header.bpm;
 		var midiPart = new Tone.Part(function(time, note) {
-			console.log(time, note);
-			synth.triggerAttackRelease(note.n, note.d, time, note.v)
-	  }, midi.tracks[1].notes).start()*/	
+			piano.triggerAttackRelease(note.n, note.d, time, note.v)
+	  	}, midi.tracks[0].notes).start(midi.tracks[0].startTime)	
+		
+		
 		//-------------------------------------------------------------------------- 
 		// Begin Section Widget Definition
 		var app_Section = {
@@ -99,7 +116,23 @@
 		$.widget("iP.app_Section", app_Section);
 		
 		// Actually init the dealio
-		$( init );		
+		$( init );	
+		
+		// yeeesh
+		setTimeout(function() {
+			console.log("setting up play start");
+			$('#play-start').click(function() {
+				console.log("clicked play start");
+				if (Tone.Transport.state != "started") {
+					Tone.Transport.start("+0.1");
+				} 
+				else {
+					Tone.Transport.stop();
+				}
+				console.log(Tone.Transport);
+			})
+		}, 1000);
+		
 		
 	})
  

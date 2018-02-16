@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="icon" href="./favicon.png" />
 	<title>ThinkSong </title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -23,145 +24,7 @@
 	<script type="text/javascript" src="./Tone.min.js"></script>
 	<script type="text/javascript" src="./StartAudioContext.js"></script>
 	<script type="text/javascript" src="./DraggablePatch.js"></script>
-	<style type="text/css">
-		.main-content {
-			padding: 8px;
-			font-size: 125%;
-		}
-		.constrained-container {
-			width: 100%;
-		}
-		.navbar {
-			border-radius: 0;
-		}
-		.section-header {
-			color: #555;
-			padding: 4px 8px;
-			border: #ccc solid 1px;
-			border-bottom: #aaa solid 1px;
-			border-left: #bbb solid 1px;
-			background-color: #d9e2e9;
-			border-radius: 4px;
-			box-shadow: 1px 4px 4px rgba(0,0,0,0.1);
-			text-shadow: 0 1px 1px #fff;
-		}
-		.section-content {
-			padding: 8px;
-			padding-left: 16px;
-			padding-bottom: 16px;
-			min-height: 64px;
-		}
-		.song-section {
-			margin: 8px 4px;
-			padding: 4px;
-			opacity: .7;
-			border: 1px solid rgba(0,0,0,0.25);
-			background-color: #ccc;
-			border-radius: 4px;
-			width: 98px;
-			height: 64px;
-			cursor: pointer;
-	-webkit-transition: background-color 0.2s, color 0.2s;
-    transition: background-color 0.2s, color 0.2s;
-		}
-		.place-holder {
-			width: 16px;
-			background-color: #00f;
-			float: true;
-		}
-		.song-section-detail {
-			border: 1px solid rgba(0,0,0,0.25);
-			background-color: #ccc;
-			border-radius: 4px;
-			padding: 0 4px;
-		}
-		.song-section-detail-item {
-			margin: 4px 0;
-			border: 1px solid rgba(0,0,0,0.25);
-			padding: 0;
-			background-color: #ccc;
-			border-radius: 4px;
-			min-width: 80px;
-			height: 100px;
-		}
-		.song-section-detail-item-bar-start {
-			border-left: 2px solid rgba(0,0,0,0.5);
-		}
-		.song-section-detail-item-bar-end {
-			border-right: 2px solid rgba(0,0,0,0.5);
-		}
-		.hilight {
-			box-shadow: 0 0 6px #6bf;
-		}
-		.green {
-			background-color: #8c8;
-		}
-		.blue {
-			background-color: #89c;
-		}
-		.red {
-			background-color: #c88;
-		}
-		.cyan {
-			background-color: #8cc;
-		}
-		.orange {
-			background-color: #ca8;
-		}
-		.white {
-			background-color: rgba(255,255,255,0.6);
-		}
-		.white:hover {
-			border-color: rgba(0,0,0,0.5);
-			border-top-color: rgba(0,0,0,0.35);
-			background-color: rgba(255,255,255,0.8);
-		}
-		.song-section:hover {
-			opacity: 1;
-		}
-		.unselectable {
-			-webkit-user-select: none; /* Safari */        
-			-moz-user-select: none; /* Firefox */
-			-ms-user-select: none; /* IE10+/Edge */
-			user-select: none; /* Standard */ 
-		}
-		.song-section-title {
-			text-align: center;
-			font-size: 75%;
-		}
-		.song-section-add-new {
-			padding-top: 8px;
-			text-align: center;
-			font-size: 125%;
-		}
-		.button {
-			cursor: pointer;
-			color: #777;
-			font-size: 1.4em;
-			text-shadow: 0 1px 1px #fff;
-		}
-		.button:hover {
-			text-shadow: 0 0 6px #8bf;
-			color: #fff;
-		}
-		.ghost {
-			background-color: #eee;
-			border-color: #ddd;
-			color: #ddd;
-		}
-		.skinny {
-			box-sizing: border-box;
-			display: block;
-			float: left;
-			margin: 8px 4px;
-			border: 2px dotted #aaa;
-			background-color: #eee;
-			border-radius: 4px;
-			padding: 4px;
-			width: 14px;
-			height: 64px;
-		}
-	</style>
+	<link rel="stylesheet" media="screen" href="./app.css">
 </head>
 <body>
 
@@ -170,7 +33,6 @@
 			<a class="navbar-brand" href="#">ThinkSong</a>
 		</div></div>
 	</nav>
-	
 	<div class="main-content">
 		<div class="container"><div class="row">
 			<div id="song-section"></div>
