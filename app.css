@@ -25,6 +25,10 @@
 	padding-bottom: 16px;
 	min-height: 64px;
 }
+.min-height {
+	min-height: 64px;
+	min-width: 128px;
+}
 .song-section {
 	margin: 8px 4px;
 	padding: 4px;
@@ -115,8 +119,16 @@ transition: background-color 0.2s, color 0.2s;
 	text-shadow: 0 1px 1px #fff;
 }
 .button:hover {
-	text-shadow: 0 0 6px #8bf;
+	color: #444;
+	text-shadow: 0 0 3px #fff, 0 0 6px #8bf;
+}
+.button-active {
 	color: #fff;
+	text-shadow: 0 0 2px #222, 0 0 3px #8bf;
+}
+.button-active:hover {
+	color: #fff;
+	text-shadow: 0 0 3px #000, 0 0 7px #8bf;
 }
 .ghost {
 	background-color: #eee;

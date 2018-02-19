@@ -2,6 +2,37 @@ var Interface = {
 	isMobile : false
 };
 
+var Piano = {
+};
+
+// Notes: Cbb3, Cb3, C3, C#3, Cx3
+// '16n', '8n', '4n', '2n', '1m' or '1n', '8t'
+var testNoteArrays = [
+	[
+		{"n":"C3","time":'0m',"v":1,"d":'4n'},{"n":"E4","time":'4n',"v":1,"d":'4n'},     {"n":"G4","time":'2n',"v":1,"d":'2n'},
+		{"n":"A3","time":'1m',"v":1,"d":'4n'},{"n":"E4","time":'1m + 4n',"v":1,"d":'4n'},{"n":"C4","time":'1m + 2n',"v":1,"d":'2n'},
+		{"n":"D3","time":'2m',"v":1,"d":'4n'},{"n":"F4","time":'2m + 4n',"v":1,"d":'4n'},{"n":"A4","time":'2m + 2n',"v":1,"d":'2n'},
+		{"n":"G3","time":'3m',"v":1,"d":'4n'},{"n":"B4","time":'3m + 4n',"v":1,"d":'4n'},{"n":"D4","time":'3m + 2n',"v":1,"d":'2n'},
+	],[
+		{"n":"C3","time":'0m',"v":1,"d":'1m'},{"n":"E4","time":'0m',"v":1,"d":'1m'},{"n":"G4","time":'0m',"v":1,"d":'1m'},
+		{"n":"A3","time":'1m',"v":1,"d":'1m'},{"n":"E4","time":'1m',"v":1,"d":'1m'},{"n":"C4","time":'1m',"v":1,"d":'1m'},
+		{"n":"D3","time":'2m',"v":1,"d":'1m'},{"n":"F4","time":'2m',"v":1,"d":'1m'},{"n":"A4","time":'2m',"v":1,"d":'1m'},
+		{"n":"G3","time":'3m',"v":1,"d":'1m'},{"n":"B4","time":'3m',"v":1,"d":'1m'},{"n":"D4","time":'3m',"v":1,"d":'1m'},
+	],[
+		{"n":"C3","time":'0m',"v":1,"d":'1m'},{"n":"E4","time":'0m',"v":1,"d":'1m'},{"n":"G4","time":'0m',"v":1,"d":'1m'},{"n":"D4","time":'0m',"v":0.5,"d":'1m'},
+		{"n":"A3","time":'1m',"v":1,"d":'1m'},{"n":"E4","time":'1m',"v":1,"d":'1m'},{"n":"C4","time":'1m',"v":1,"d":'1m'},{"n":"G4","time":'1m',"v":0.5,"d":'1m'},
+		{"n":"F3","time":'2m',"v":1,"d":'1m'},{"n":"A4","time":'2m',"v":1,"d":'1m'},{"n":"C4","time":'2m',"v":1,"d":'1m'},{"n":"E5","time":'2m',"v":0.5,"d":'1m'},
+		{"n":"G3","time":'3m',"v":1,"d":'1m'},{"n":"B4","time":'3m',"v":1,"d":'1m'},{"n":"D4","time":'3m',"v":1,"d":'1m'},{"n":"A5","time":'3m',"v":0.5,"d":'1m'},
+	],[
+		{"n":"C3","time":'0m',"v":1,"d":'4n'},{"n":"E4","time":'4n',"v":1,"d":'4n'},     {"n":"G4","time":'2n',"v":1,"d":'2n'},
+		{"n":"A3","time":'1m',"v":1,"d":'4n'},{"n":"E4","time":'1m + 4n',"v":1,"d":'4n'},{"n":"C4","time":'1m + 2n',"v":1,"d":'2n'},
+		{"n":"D3","time":'2m',"v":1,"d":'4n'},{"n":"F4","time":'2m + 4n',"v":1,"d":'4n'},{"n":"A4","time":'2m + 2n',"v":1,"d":'2n'},
+		{"n":"G3","time":'3m',"v":1,"d":'1m'},{"n":"B4","time":'3m',"v":1,"d":'1m'},{"n":"D4","time":'3m',"v":1,"d":'1m'},{"n":"A5","time":'3m',"v":0.5,"d":'1m'},
+	],[
+		{"n":"C3","time":'0m',"v":1,"d":'2m'},{"n":"E4","time":'0m',"v":1,"d":'2m'},{"n":"G4","time":'0m',"v":1,"d":'2m'},{"n":"B4","time":'0m',"v":0.5,"d":'2m'},
+	]
+];
+
 	$(function() {
 
 		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -15,7 +46,7 @@ var Interface = {
 		}
 	
 		// Bosendoerfer ripped from Logix
-		var piano = new Tone.Sampler({ // .[mp3|ogg]
+		Piano = new Tone.Sampler({ // .[mp3|ogg]
 			'A0' : 'A0.mp3',
 			'C1' : 'C1.mp3',
 			'D#1' : 'Ds1.mp3',
@@ -47,17 +78,13 @@ var Interface = {
 			'baseUrl' : './piano/',
 		});
 		
-		var volume = new Tone.Volume(-8).toMaster();
+		var volume = new Tone.Volume(-18).toMaster();
 	//	var chorus = new Tone.Chorus().connect(volume); chorus.wet.value = 0.05;
 	//	var delay = new Tone.FeedbackDelay(1, 0.25).connect(volume); delay.wet.value = 0.025;
 		var reverb = new Tone.Freeverb(0.8, 5000).connect(volume); reverb.wet.value = 0.2;
-		piano.connect(reverb);
+		Piano.connect(reverb);
 		
-		Tone.Transport.bpm.value = midi.header.bpm;
-		var midiPart = new Tone.Part(function(time, note) {
-			piano.triggerAttackRelease(note.n, note.d, time, note.v)
-	  	}, midi.tracks[0].notes).start(midi.tracks[0].startTime)	
-		
+		Tone.Transport.bpm.value = 140;
 		
 		//-------------------------------------------------------------------------- 
 		// Begin Section Widget Definition
@@ -120,18 +147,27 @@ var Interface = {
 		
 		// yeeesh
 		setTimeout(function() {
-			console.log("setting up play start");
 			$('#play-start').click(function() {
-				console.log("clicked play start");
 				if (Tone.Transport.state != "started") {
+					$('#play-start').addClass('button-active');
+					$('#play-start').removeClass('fa-play-circle-o');
+					$('#play-start').addClass('fa-stop-circle-o');
 					Tone.Transport.start("+0.1");
+					Tone.Transport.schedule(function() {
+						Tone.Transport.stop();
+						$('#play-start').removeClass('button-active');
+						$('#play-start').removeClass('fa-stop-circle-o');
+						$('#play-start').addClass('fa-play-circle-o');
+					}, '18m'); // TODO: get actual song length
 				} 
 				else {
 					Tone.Transport.stop();
+					$('#play-start').removeClass('button-active');
+					$('#play-start').removeClass('fa-stop-circle-o');
+					$('#play-start').addClass('fa-play-circle-o');
 				}
-				console.log(Tone.Transport);
 			})
-		}, 1000);
+		}, 200);
 		
 		
 	})
@@ -147,8 +183,8 @@ var Interface = {
 		//----------------------------------------------------------------------
 		$('#song-section').app_Section({title: 'Song <i id="play-start" class="pull-right button fa fa-play-circle-o"></i>',
 			editable: true});
-		var content = '<div id="droppable-area" class="row">' +
-			'<div class="col-xs-1 unselectable song-section green"><div class="unsortable unselectable song-section-title">Intro</div></div>' +
+		var content = '<div id="droppable-area" class="row min-height">' +
+		/*	'<div class="col-xs-1 unselectable song-section green"><div class="unsortable unselectable song-section-title">Intro</div></div>' +
 			'<div class="col-xs-1 unselectable song-section blue"><div class="unsortable unselectable song-section-title">Verse</div><div class="song-section-title">Repeat: 2x</div></div>' +
 			'<div class="col-xs-1 unselectable song-section red"><div class="unsortable unselectable song-section-title">Pre-Chorus</div></div>' +
 			'<div class="col-xs-1 unselectable song-section cyan"><div class="unsortable unselectable song-section-title">Chorus</div></div>' +
@@ -158,13 +194,13 @@ var Interface = {
 			'<div class="col-xs-1 unselectable song-section cyan"><div class="unsortable unselectable song-section-title">Chorus</div><div class="song-section-title">Transpose: +1</div></div>' +
 			'<div class="col-xs-1 unselectable song-section cyan"><div class="unsortable unselectable song-section-title">Chorus</div></div>' +
 			'<div class="col-xs-1 unselectable song-section orange"><div class="unsortable unselectable song-section-title">Outro</div></div>' +
-			'</div>'
+			*/'</div>'
   		$('#song-section').app_Section('setContent', content);
 		
 		// What the song could be made of...//
 		//----------------------------------------------------------------------
 		$('#section-browser').app_Section({title: 'Section Browser <i id="add-new-section" class="pull-right button fa fa-plus-square-o"></i>'});
-		content = '<div id="sb-inner" class="row">' +
+		content = '<div id="sb-inner" class="row min-height">' +
 			'<div class="sb-draggable col-xs-1 unselectable song-section green"><div class="unselectable song-section-title">Intro</div></div>' +
 			'<div class="sb-draggable col-xs-1 unselectable song-section blue"><div class="unselectable song-section-title">Verse</div></div>' +
 			'<div class="sb-draggable col-xs-1 unselectable song-section red"><div class="unselectable song-section-title">Pre-Chorus</div></div>' +
@@ -181,8 +217,13 @@ var Interface = {
 			revert: 'invalid',
 			zIndex: 2000
 		};
+		var ii = 0;
 		$.each( $(".sb-draggable"), function(idx, item) {
 			$(item).draggable(config).disableSelection();
+			$(item).tonePart = new Tone.Part(function(time, note) {
+				Piano.triggerAttackRelease(note.n, note.d, time, note.v)
+	  		}, testNoteArrays[ii]).start((ii * 4)+ 'm');
+	  		ii++;
 		});
 		$('#add-new-section').click(function() {
 			var newS = $('#sb-inner');
@@ -242,6 +283,31 @@ var Interface = {
   		}
   		content += '</div>';
   		$('#section-detail').app_Section('setContent', content);
+
+  		// enhance Tone
+  		//----------------------------------------------------------------------
+		Tone.Part.prototype.addAll = function(eventArray) {
+			this.removeAll();		
+			// add the events
+			for (var i = 0; i < eventArray.length; i++){
+				if (Array.isArray(eventArray[i])){
+					this.add(eventArray[i][0], eventArray[i][1]);
+				} else {
+					this.add(eventArray[i]);
+				}
+			}
+			return this;
+		};
+		
+  		//----------------------------------------------------------------------
+		Tone.Part.prototype.duration = function() {
+			// TODO: either figure out how to get the duration from the Part...
+			//	or use a helper object that builds/manages parts and can figure
+			//	out how long a part would be, etc.
+			for (var i = 0; i < this._events.length; i++){
+				var event = this._events[i];
+			}		
+		};
 	}
 
 	// Common song section names: intro, outro, pre-chorus, chorus, refrain, verse, bridge, solo, interlude, segue
