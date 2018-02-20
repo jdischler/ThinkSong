@@ -13,6 +13,8 @@
 		else {
 			return new Tone.Drummer();
 		}
+		
+		return this;
 	};
 
 	Tone.extend(Tone.Drummer);

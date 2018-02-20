@@ -143,8 +143,10 @@ function init() {
 	var ii = 0;
 	$.each( $(".sb-draggable"), function(idx, item) {
 		$(item).draggable(config).disableSelection();
-		new Tone.Section(Piano).toPart((ii * 4) + 'm');
-		ii++;
+		var sec = new Tone.Section();
+		sec.backingInstrument = Piano;
+		sec.toPart(ii + ':0');
+		ii += 4;
 	});
 	$('#add-new-section').click(function() {
 		var newS = $('#sb-inner');

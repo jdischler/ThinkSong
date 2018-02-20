@@ -6,15 +6,15 @@
 //function() {
 {
 	//--------------------------------------------------------------------------
-	Tone.Section = function(instrument) {
+	Tone.Section = function() {
 		// allows it to be constructed with or without 'new'
 		if (this instanceof Tone.Section) {
-			this._instrument = instrument;
 			this._drummer = new Tone.Drummer();
 		} 
 		else {
-			return new Tone.Section(instrument);
+			return new Tone.Section();
 		}
+		return this;
 	};
 
 	Tone.extend(Tone.Section);
@@ -46,15 +46,15 @@
 	
 	//--------------------------------------------------------------------------
 	Tone.Section.prototype.toPart = function(start) {
-		if (!this._instrument) {
-			console.log('Instrument not set');
+		if (!this._backingInstrument) {
+			console.log('Backing Instrument not set');
 			return;
 		}
 		if (this._part) {
 			this._part.dispose();
 		}
 		var evts = this._createEvents();
-		var i = this._instrument;
+		var i = this._backingInstrument;
 		
 		this._part = new Tone.Part(function(time, note) {
 			i.triggerAttackRelease(note.n, note.d, time, note.v)
@@ -74,19 +74,19 @@
 	}
 
 	//--------------------------------------------------------------------------
-	Object.defineProperty(Tone.Section.prototype, "instrument", {
+	Object.defineProperty(Tone.Section.prototype, "backingInstrument", {
 		get : function() {
-			return this._instrument;
+			return this._backingInstrument;
 		},
 		set : function(instrument) {
-			this._instrument = instrument;
+			this._backingInstrument = instrument;
 		}
 	});
 
 	//  Clean up
 	//--------------------------------------------------------------------------
 	Tone.Section.prototype.dispose = function() {
-		this._instrument = null;
+		this._backingInstrument = null;
 		if (this._part) {
 			this._part.dispose();
 			this._part = null;
