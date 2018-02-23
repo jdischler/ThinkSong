@@ -42,10 +42,10 @@ function configureInstruments() {
 
 	Drums = new Tone.Sampler({ // .[mp3|ogg]
 //		'B0'  :	'kick.mp3', // acoustic bass drum
-		'C1'  :	'kick.mp3', // kick
-//		'C#1' : 'snare.mp3', // side stick
+		'C1'  :	'kick.mp3', 
+		'C#1' : 'side_stick.mp3', 
 		'D1'  :	'snare.mp3', // acoustic snare
-//		'D#1' : 'snare.mp3', // clap
+		'D#1' : 'clap.mp3', 
 //		'E1'  :	'snare.mp3', // electric snare
 		'F1'  :	'low_tom.mp3', // low floor tom
 		'F#1' : 'hh_closed.mp3', // closed hi-hat
@@ -59,10 +59,10 @@ function configureInstruments() {
 		'D2'  :	'hi_tom.mp3', // hi tom
 		'D#2' : 'ride.mp3', // ride 1
 		'E2'  :	'crash.mp3', // Chinese cymbal
-		'F2'  :	'ride.mp3', // ride bell
-//		'F#2' : 'snare.mp3', // tambourine
+		'F2'  :	'ride_bell.mp3',
+		'F#2' : 'tambourine.mp3', 
 		'G2'  :	'crash.mp3', // splash
-//		'G#2' : 'snare.mp3', // cowbell
+		'G#2' : 'cowbell.mp3',
 		'A2'  :	'crash.mp3', // crash 2
 //		'A#2' : 'crash.mp3', // vibraslap
 		'B2'  :	'ride.mp3', // ride 2
