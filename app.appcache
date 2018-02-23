@@ -1,9 +1,8 @@
 CACHE MANIFEST
 
 # Do these values matter?
-# v0.0111
+# v0.014
 
-ThinkSong.html
 ./favicon.png
 https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
 http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js
@@ -11,15 +10,12 @@ https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
 https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css
 https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
 https://use.fontawesome.com/621abd769a.js
-./midiplayer.min.js 
-./soundfont-player.min.js
+./app.css
 ./Tone.min.js
 ./Drummer.js
 ./Section.js
 ./StartAudioContext.js
 ./DraggablePatch.js
-./app.css
-./SongData.js	
 ./GarbageMain.js	
 ./configureInstruments.js
 ./drumkit/crash.mp3
