@@ -21,6 +21,7 @@ $(function() {
 	configureInstruments();
 	
 	Tone.Transport.bpm.value = 140;
+	Tone.context.latencyHint = 'playback'; //low latency not needed and increases chance of pops/clicks
 	
 	//-------------------------------------------------------------------------- 
 	// Begin Section Widget Definition
