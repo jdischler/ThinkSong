@@ -5,6 +5,7 @@ var Interface = {
 var allowStartToggle = true;
 
 // may need some refinement but having the flexibility to allow an option to be an array of things or just a single thing
+//------------------------------------------------------------------------------
 function forEach(ar, func) {
 	if (ar instanceof Array) {
 		ar.forEach(func);
@@ -14,6 +15,7 @@ function forEach(ar, func) {
 	}
 }
 
+//------------------------------------------------------------------------------
 $(function() {
 
 	// iOS requires the audio context to be created off of some kind of button mash...

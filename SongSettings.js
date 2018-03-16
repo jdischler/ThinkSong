@@ -1,4 +1,5 @@
 {
+	// TODO: refactor and generally make this functional
 	//--------------------------------------------------------------------------
 	SongSettings = function() {
 		if (this instanceof SongSettings) { // allows it to be constructed with or without 'new'
@@ -31,7 +32,7 @@
 					  '<option>G</option>' + 
 				  '</select></div>' +
 				  '<div class="col-xs-3"><select class="form-control form-control-lg">' +
-					  '<option>&nbsp;</option>' + // none
+					  '<option>(&#x266e;)</option>' + // none (natural)
 					  '<option>&#x266d;</option>' + // b
 					  '<option>&#x266f;</option>' + // #
 				  '</select></div>' +
@@ -74,6 +75,9 @@
 		$('body').append(structure);
 		this._el = $('#song-settings').modal({show: false});
 		
+		// TODO: bind something to the SAVE / OK button to persist the settings and then
+		//	update everything in the song
+		
 		return this;
 	}
 
@@ -81,5 +85,7 @@
 
 	SongSettings.prototype.doModal = function() {
 		this._el.modal('show');
+		
+		// TODO: do something when shown, most likely ensure values shown are acurate...
 	}
 }

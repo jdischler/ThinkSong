@@ -4,6 +4,10 @@ var Piano = {
 var Drums = {
 };
 
+// TODO: consider only loading instruments as needed
+
+// TODO: these samples are really huge. Not necesarilly big as an .mp3 but if I understand
+//	they are decompressed to webAudio buffers where the audio length becomes something to watch...
 //------------------------------------------------------------------------------
 function configureInstruments() {
 
