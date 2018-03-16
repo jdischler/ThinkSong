@@ -1,7 +1,15 @@
 .main-content {
 	padding: 8px;
-	font-size: 125%;
+	font-size: 145%;
 }
+
+@media (min-width: 992px) {
+	.main-content {
+		padding: 8px;
+		font-size: 125%;
+	}
+}
+
 .constrained-container {
 	width: 100%;
 }
@@ -162,8 +170,10 @@ transition: background-color 0.2s, color 0.2s;
 }
 
 .editable-label-text {
-	margin: -2px;
+	margin-top: -2px;
+	margin-bottom: -2px;
 	padding-top: 0;
+	padding-left: 13px;
 	padding-bottom: 0;
 }
 
@@ -171,7 +181,9 @@ transition: background-color 0.2s, color 0.2s;
 	border: 1px dotted rgba(0,0,0,0.5);
 	background-color: rgba(255,255,255,0.25);
 	border-radius: 8px;
-	margin: -1px;
+	margin-top: -1px;
+	margin-bottom: -1px;
+	padding-left: 14px;
 	cursor:
 }
 
@@ -212,3 +224,16 @@ transition: background-color 0.2s, color 0.2s;
     background-color: #479;
     color: #fff; 
 }		
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+	background-color: rgba(240, 173, 78, 0.8);
+	text-shadow: 0 0 4px rgba(255,255,255,0.5);
+}
+
+.navbar-inverse .navbar-toggle .icon-bar {
+	background-color: white;
+}
+
+.close {
+	font-size: 24px;
+}
