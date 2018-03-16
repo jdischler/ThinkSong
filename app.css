@@ -48,8 +48,8 @@
 	width: 98px;
 	height: 64px;
 	cursor: pointer;
--webkit-transition: background-color 0.2s, color 0.2s;
-transition: background-color 0.2s, color 0.2s;
+    -webkit-transition: background-color 0.2s, color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 .place-holder {
 	width: 16px;
@@ -236,4 +236,13 @@ transition: background-color 0.2s, color 0.2s;
 
 .close {
 	font-size: 24px;
+}
+
+.tooltip {
+	font-size: 16px;
+}
+
+.tooltip-inner {
+	min-width: 125px;
+	box-shadow: 0 0 2px white, 0 2px 5px rgba(0,0,0,0.5);
 }

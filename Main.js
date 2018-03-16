@@ -16,13 +16,13 @@ function forEach(ar, func) {
 
 $(function() {
 
-	// iOS requires the audio context to be created off of some kind of button push...
+	// iOS requires the audio context to be created off of some kind of button mash...
 	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
 		Interface.isMobile = true;
 		$("body").addClass("Mobile");
 		var element = $("<div>", {"id" : "MobileStart"}).appendTo("body");
 		var button = $("<div>").attr("id", "Button").text("Activate Audio").appendTo(element);
-		StartAudioContext(Tone.context, button, function(){
+		StartAudioContext(Tone.context, button, function() {
 			element.remove();
 			$("body").removeClass("Mobile");
 		});
@@ -36,6 +36,14 @@ $(function() {
 	initArranger();
 	
 	initSectionEditor();
+	
+	// init all toolips: TODO: maybe init as each element is created/added?
+	// Tooltips are weird on (at least) iPhone. Requires pressing button twice. First gives tip, second activates...
+	if (!Interface.isMobile) {
+		$('[data-toggle="tooltip"]').tooltip({
+    		 'delay': { show: 250, hide: 0 
+		 }})
+	}
 })
 
 // random notify example

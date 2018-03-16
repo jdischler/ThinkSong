@@ -3,6 +3,7 @@
 	// $('#someDivToMakeIntoSection'), //
 	// 'convenienceIDforNewSection', // may not be needed if this class can be extended to ease using this crap 
 	// {buttonDefs:data,title:string,editable:boolean}
+	// buttonDef: {id: 'button-id', fa: 'font-awesome-tag', help: 'tooltip text'}
 	//--------------------------------------------------------------------------
 	ArrangerSection = function(jqueryEl, sectionDivID, options) {
 		if (this instanceof ArrangerSection) { // allows it to be constructed with or without 'new'
@@ -24,7 +25,8 @@
 	  	forEach(options.buttons, function(item) {
 	  		if (item) {
 	  		 	button = button ? button + '&nbsp; &nbsp;' : ''
-	  			button += `<i id="${item.id}" class="pull-right button fa ${item.fa}"></i>`
+	  			button += `<i id="${item.id}" class="pull-right button fa ${item.fa}"`;
+	  			button += ` data-toggle="tooltip" data-placement="top" title="${item.help}"></i>`;
 	  		}
 	  	});
 	  	button = "<div class='col-xs-3' style='padding:0;'>" + (button || '') + "</div>"; 
@@ -104,7 +106,11 @@ function initArranger() {
 	_SongDefinition = ArrangerSection($('#song-section'), 
 		'song-drop-area', { 
 			title: 'Song Title', 
-			buttons: [{id: "play-start", fa: "fa-play-circle-o"},{id: "song-configure", fa: "fa-cog"}],
+			buttons: [{
+				id: "play-start", fa: "fa-play-circle-o", help: "Play song"
+			},{
+				id: "song-configure", fa: "fa-cog", help: "Song settings"
+			}],
 			editableTitle: true
 		}
 	);
@@ -181,7 +187,9 @@ function initArranger() {
 	_SongElementBrowser = ArrangerSection($('#section-browser'),
 		'sb-inner', {// TODO, choose better div name?
 			title: 'Section Browser', 
-			buttons: {id: "add-new-section", fa: "fa-plus-square-o"}
+			buttons: {
+				id: "add-new-section", fa: "fa-plus-square-o", help: 'New section'
+			}
 		}
 	); 
 	
