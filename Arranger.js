@@ -131,8 +131,18 @@ function initArranger() {
 		containment: 'body',
 		placeholder: 'skinny',
 		revert: 100,
-		sort: sortOrStop,
-		stop: sortOrStop,
+		sort: function(evt, ui) {
+			var b1 = _SongDefinition.getBounds('.section-content'), o = ui.offset;
+			if (o.top < b1.top - 70 || o.top > b1.bottom - 25 || o.left < b1.left - 70 || o.left > b1.right - 5) 
+				$(ui.item).addClass('ghost');
+			else $(ui.item).removeClass('ghost');
+		},
+		stop: function(evt, ui) {
+			var b1 = _SongDefinition.getBounds('.section-content'), o = ui.offset;
+			if (o.top < b1.top - 70 || o.top > b1.bottom - 25 || o.left < b1.left - 70 || o.left > b1.right - 5) 
+				$(ui.item).remove();
+			else $(ui.item).removeClass('ghost');
+		},
 		start: function() {},
 		receive: function (e, ui) {}
 	}).disableSelection();
