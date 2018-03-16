@@ -115,17 +115,6 @@ function initArranger() {
 		}
 	);
 
-	var sortOrStop = function(evt, ui) {
-		var b1 = _SongDefinition.getBounds('.section-content'),
-			o = ui.offset;
-		if (o.top < b1.top - 70 || o.top > b1.bottom - 25 || o.left < b1.left - 70 || o.left > b1.right - 5) {
-			$(ui.item).addClass('ghost');
-		}
-		else {
-			$(ui.item).removeClass('ghost');
-		}
-	}
-	
 	// Control placement in song drop area
 	$("#song-drop-area").sortable({
 		containment: 'body',
@@ -140,7 +129,7 @@ function initArranger() {
 		stop: function(evt, ui) {
 			var b1 = _SongDefinition.getBounds('.section-content'), o = ui.offset;
 			if (o.top < b1.top - 70 || o.top > b1.bottom - 25 || o.left < b1.left - 70 || o.left > b1.right - 5) 
-				$(ui.item).remove();
+				$(ui.item).remove(); // This is the difference...
 			else $(ui.item).removeClass('ghost');
 		},
 		start: function() {},
